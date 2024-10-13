@@ -19,10 +19,12 @@
 * **Automatización de Instalaciones:**
     * `install_mysql_docker.sh`: Instala MySQL en un contenedor Docker de manera rápida y sencilla.
 
-* **Otros Scripts:**
-    * [Breve descripción de otros scripts y su función]
+* **PDF A WORD**
+    * pdf_a_word.py : Convierte un archivo PDF a un archivo Word (.docx) utilizando la librería `pdf2docx`.
 
 ## 🚀 Cómo usar
+
+## 🚀 Cómo usar los scripts shell
 
 1. Clona este repositorio:
    ```bash
@@ -40,6 +42,19 @@
    ```bash
    ./nombre_del_script.sh
    ```
+
+## 🚀 Cómo usar los scripts Python
+
+1. Clona este repositorio:
+    ```bash
+    git clone https://github.com/SrAether/scripsvariados.git
+    ```
+2. Navega al directorio del script que deseas utilizar.
+
+3. Ejecuta el script:
+    ```bash
+    python nombre_del_script.py
+    ```
 
 ## 🤝 Contribuciones
 
