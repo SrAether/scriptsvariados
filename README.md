@@ -29,7 +29,7 @@
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/SrAether/scripsvariados.git
+   git clone https://github.com/SrAether/scriptsvariados.git
    ```
 
 2. Navega al directorio del script que deseas utilizar.
@@ -50,7 +50,7 @@ Este script verifica la distribución de Linux que estás usando, instala `curl`
 
 1. Clona el repositorio y navega al directorio:
    ```bash
-   git clone https://github.com/SrAether/scripsvariados.git
+   git clone https://github.com/SrAether/scriptsvariados.git
    cd scripts_variados
    ```
 
@@ -70,7 +70,7 @@ Este script verifica la distribución de Linux que estás usando, instala `curl`
 
 1. Clona este repositorio:
     ```bash
-    git clone https://github.com/SrAether/scripsvariados.git
+    git clone https://github.com/SrAether/scriptsvariados.git
     ```
 2. Navega al directorio del script que deseas utilizar.
 
