@@ -18,7 +18,7 @@ install_oh_my_zsh() {
         echo "Oh My Zsh ya está instalado."
     else
         echo "Instalando Oh My Zsh..."
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        RUNZSH=NO sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
 }
 
