@@ -22,6 +22,16 @@ install_oh_my_zsh() {
     fi
 }
 
+# verificamos si estamos ejecutando con sudo
+if [ "$EUID" -ne 0 ]; then
+    echo "Por favor, ejecuta este script con sudo."
+    exit
+fi
+
+# Preguntamos si desea instalar fastfetch y agregarlo a .zshrc
+echo "¿Deseas instalar fastfetch y agregarlo a .zshrc? (s/n)"
+read -r fastfetch
+
 # Verificación del tipo de distribución Linux
 if [ -f /etc/arch-release ]; then
     echo "Estás usando Arch Linux."
@@ -29,6 +39,12 @@ if [ -f /etc/arch-release ]; then
     install_if_not_present "curl" "sudo pacman -S --noconfirm curl"
     install_if_not_present "zsh" "sudo pacman -S --noconfirm zsh"
     install_if_not_present "git" "sudo pacman -S --noconfirm git"
+    # Instalar fastfetch si se selecciona
+    if [ "$fastfetch" = "s" ]; then
+        install_if_not_present "fastfetch" "sudo pacman -S --noconfirm fastfetch"
+        # Agregar fastfetch a .zshrc
+        echo "fastfetch" >> ~/.zshrc
+    fi
 
 elif [ -f /etc/debian_version ]; then
     echo "Estás usando Debian o un derivado de Debian."
@@ -36,6 +52,12 @@ elif [ -f /etc/debian_version ]; then
     install_if_not_present "curl" "sudo apt-get install -y curl"
     install_if_not_present "zsh" "sudo apt-get install -y zsh"
     install_if_not_present "git" "sudo apt-get install -y git"
+    # Instalar fastfetch si se selecciona
+    if [ "$fastfetch" = "s" ]; then
+        install_if_not_present "fastfetch" "sudo apt-get install -y fastfetch"
+        # Agregar fastfetch a .zshrc
+        echo "fastfetch" >> ~/.zshrc
+    fi
 
 elif [ -f /etc/redhat-release ]; then
     echo "Estás usando RedHat o un derivado de RedHat."
@@ -43,6 +65,12 @@ elif [ -f /etc/redhat-release ]; then
     install_if_not_present "curl" "sudo yum install -y curl"
     install_if_not_present "zsh" "sudo yum install -y zsh"
     install_if_not_present "git" "sudo yum install -y git"
+    # Instalar fastfetch si se selecciona
+    if [ "$fastfetch" = "s" ]; then
+        install_if_not_present "fastfetch" "sudo yum install -y fastfetch"
+        # Agregar fastfetch a .zshrc
+        echo "fastfetch" >> ~/.zshrc
+    fi
 
 else
     echo "No se pudo determinar el tipo de Linux."
@@ -79,3 +107,5 @@ source ~/.zshrc
 
 # Mensaje de finalización
 echo "Oh My Zsh y los plugins se han instalado correctamente."
+
+
