@@ -18,13 +18,14 @@
 
 * **Automatización de Instalaciones:**
     * `install_mysql_docker.sh`: Instala MySQL en un contenedor Docker de manera rápida y sencilla.
+    * `ohmyzshauto.sh`: Automatiza la instalación de Oh My Zsh, junto con los plugins `zsh-autosuggestions`, `zsh-syntax-highlighting`, y `zsh-completions`.
 
 * **PDF A WORD**
     * pdf_a_word.py : Convierte un archivo PDF a un archivo Word (.docx) utilizando la librería `pdf2docx`.
 
 ## 🚀 Cómo usar
 
-## 🚀 Cómo usar los scripts shell
+### 🚀 Cómo usar los scripts shell
 
 1. Clona este repositorio:
    ```bash
@@ -42,6 +43,28 @@
    ```bash
    ./nombre_del_script.sh
    ```
+
+### Ejemplo con `ohmyzshauto.sh`:
+
+Este script verifica la distribución de Linux que estás usando, instala `curl`, `zsh`, `git`, y luego instala **Oh My Zsh** y los plugins `zsh-autosuggestions`, `zsh-syntax-highlighting`, y `zsh-completions`.
+
+1. Clona el repositorio y navega al directorio:
+   ```bash
+   git clone https://github.com/SrAether/scripsvariados.git
+   cd scripts_variados
+   ```
+
+2. Asegúrate de que el script tenga permisos de ejecución:
+   ```bash
+   chmod +x ohmyzshauto.sh
+   ```
+
+3. Ejecuta el script:
+   ```bash
+   ./ohmyzshauto.sh
+   ```
+
+4. Sigue las instrucciones en pantalla y el shell cambiará a Zsh con los plugins activados.
 
 ## 🚀 Cómo usar los scripts Python
 
