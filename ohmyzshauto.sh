@@ -22,12 +22,6 @@ install_oh_my_zsh() {
     fi
 }
 
-# verificamos si estamos ejecutando con sudo
-if [ "$EUID" -ne 0 ]; then
-    echo "Por favor, ejecuta este script con sudo."
-    exit
-fi
-
 # Preguntamos si desea instalar fastfetch y agregarlo a .zshrc
 echo "¿Deseas instalar fastfetch y agregarlo a .zshrc? (s/n)"
 read -r fastfetch
