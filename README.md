@@ -51,6 +51,8 @@ Este repositorio contiene una colección de scripts bash y Python diseñados par
 | Script | Descripción | Características |
 |--------|-------------|-----------------|
 | `automatizarInstalacionMySQLDocker.sh` | Instala y configura MySQL en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración segura de MySQL |
+| `automatizarInstalacionMariaDBDocker.sh` | Instala y configura MariaDB en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración optimizada de MariaDB<br>✅ Usuarios personalizados<br>✅ Configuraciones avanzadas |
+| `automatizarInstalacionMongoDBDocker.sh` | Instala y configura MongoDB en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración con/sin autenticación<br>✅ Replica Sets<br>✅ Usuarios y roles<br>✅ Scripts de inicialización |
 | `automatizarInstalacionPostgreSQLDocker.sh` | Instala y configura PostgreSQL en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración optimizada de PostgreSQL |
 | `automatizarInstalacionPHP.sh` | Configura un entorno de desarrollo PHP con Nginx en Docker | ✅ Stack completo PHP + Nginx<br>✅ Configuración automática<br>✅ Entorno listo para desarrollo |
 
@@ -110,6 +112,43 @@ El script `automatizarInstalacionMySQLDocker.sh` automatiza completamente la ins
 - ✅ Descarga la imagen oficial de MySQL
 - ✅ Configura el contenedor con variables de entorno seguras
 - ✅ Expone el puerto 3306 para conexiones
+
+### 🐬 MariaDB en Docker
+
+El script `automatizarInstalacionMariaDBDocker.sh` automatiza completamente la instalación de MariaDB:
+
+```bash
+./automatizarInstalacionMariaDBDocker.sh
+```
+
+**Qué hace el script:**
+- ✅ Verifica si Docker está instalado
+- ✅ Instala Docker si es necesario
+- ✅ Descarga la imagen oficial de MariaDB
+- ✅ Configura el contenedor con variables de entorno seguras
+- ✅ Expone el puerto 3306 para conexiones
+- ✅ Permite configuración de usuarios personalizados
+- ✅ Configuraciones avanzadas de rendimiento (InnoDB, Query Cache)
+- ✅ Soporte para charset UTF8MB4 por defecto
+
+### 🍃 MongoDB en Docker
+
+El script `automatizarInstalacionMongoDBDocker.sh` automatiza completamente la instalación de MongoDB:
+
+```bash
+./automatizarInstalacionMongoDBDocker.sh
+```
+
+**Qué hace el script:**
+- ✅ Verifica si Docker está instalado
+- ✅ Instala Docker si es necesario
+- ✅ Descarga la imagen oficial de MongoDB
+- ✅ Configura autenticación opcional con usuarios y roles
+- ✅ Expone el puerto 27017 para conexiones
+- ✅ Configuración de Replica Sets para alta disponibilidad
+- ✅ Configuraciones de rendimiento (WiredTiger Cache, conexiones)
+- ✅ Soporte para scripts de inicialización JavaScript
+- ✅ Usuarios administrador y de aplicación separados
 
 ### 🐘 PostgreSQL en Docker
 
@@ -177,6 +216,10 @@ El script `automatizarInstalacionPHP.sh` crea un stack completo de desarrollo:
 
 # 2. Instalar base de datos
 ./automatizarInstalacionMySQLDocker.sh
+# o
+./automatizarInstalacionMariaDBDocker.sh
+# o
+./automatizarInstalacionMongoDBDocker.sh
 # o
 ./automatizarInstalacionPostgreSQLDocker.sh
 

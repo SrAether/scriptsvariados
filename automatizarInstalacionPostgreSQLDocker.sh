@@ -39,6 +39,12 @@ cleanup() {
             if validar_yn "¿Desea eliminar el contenedor creado debido al error?"; then
                 $DOCKER_CMD rm -f "$nombre"
                 log "Contenedor eliminado"
+                
+                # Preguntar si también quiere eliminar el volumen
+                if [ -n "$volume_name" ] && validar_yn "¿Desea también eliminar el volumen de datos ($volume_name)?"; then
+                    $DOCKER_CMD volume rm "$volume_name" 2>/dev/null || true
+                    log "Volumen eliminado"
+                fi
             fi
         fi
     fi
@@ -133,6 +139,17 @@ while true; do
     if $DOCKER_CMD ps -a --format "table {{.Names}}" | grep -q "^$nombre$" 2>/dev/null; then
         echo "Ya existe un contenedor con el nombre '$nombre'"
         if validar_yn "¿Desea eliminarlo y crear uno nuevo?"; then
+            # Verificar si existe un volumen asociado
+            volumen_existente="${nombre}_postgres_data"
+            if $DOCKER_CMD volume ls --format "table {{.Name}}" | grep -q "^$volumen_existente$" 2>/dev/null; then
+                echo "Se encontró un volumen de datos existente: $volumen_existente"
+                if validar_yn "¿Desea conservar los datos existentes?"; then
+                    log "Se conservarán los datos del volumen existente"
+                else
+                    $DOCKER_CMD volume rm "$volumen_existente" 2>/dev/null || true
+                    log "Volumen anterior eliminado"
+                fi
+            fi
             $DOCKER_CMD rm -f "$nombre"
             break
         fi
@@ -225,7 +242,7 @@ if validar_yn "¿Le gustaría importar scripts SQL de inicialización?"; then
 fi
 
 # Crear volumen nombrado para persistencia
-volume_name="${nombre}_data"
+volume_name="${nombre}_postgres_data"
 if ! $DOCKER_CMD volume ls | grep -q "$volume_name" 2>/dev/null; then
     log "Creando volumen para datos: $volume_name"
     $DOCKER_CMD volume create "$volume_name"
@@ -285,6 +302,7 @@ if eval "$sentencia"; then
     echo "Base de datos: $db"
     echo "Usuario: $usuario"
     echo "Contraseña: [la que configuraste]"
+    echo "Volumen de datos: $volume_name"
     echo ""
     echo "Comandos de conexión:"
     echo "psql -h localhost -p $puerto -U $usuario -d $db"
@@ -293,6 +311,11 @@ if eval "$sentencia"; then
     echo ""
     echo "URL de conexión:"
     echo "postgresql://$usuario:[password]@localhost:$puerto/$db"
+    echo ""
+    echo "GESTIÓN DE DATOS:"
+    echo "- Para hacer backup: $DOCKER_CMD exec $nombre pg_dump -U $usuario -d $db > backup.sql"
+    echo "- Para ver volúmenes: $DOCKER_CMD volume ls"
+    echo "- Para eliminar volumen: $DOCKER_CMD volume rm $volume_name"
     echo "=============================="
     
     # Información adicional útil
