@@ -241,13 +241,10 @@ if eval "$sentencia"; then
     log "Esperando a que MySQL esté listo..."
     timeout=90
     while [ $timeout -gt 0 ]; do
-        # Primero verificar si el proceso está escuchando en el puerto
-        if $DOCKER_CMD exec "$nombre" ss -tlnp | grep -q ":3306 " 2>/dev/null; then
-            # Luego intentar conectarse con mysql
-            if $DOCKER_CMD exec "$nombre" mysql -u root -p"$contrasena_root" -e "SELECT 1;" >/dev/null 2>&1; then
-                log "MySQL está listo y funcionando"
-                break
-            fi
+        # Intentar conectarse con mysql directamente
+        if $DOCKER_CMD exec "$nombre" mysql -u root -p"$contrasena_root" -e "SELECT 1;" >/dev/null 2>&1; then
+            log "MySQL está listo y funcionando"
+            break
         fi
         sleep 3
         timeout=$((timeout - 3))

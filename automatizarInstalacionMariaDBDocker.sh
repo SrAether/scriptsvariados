@@ -322,13 +322,10 @@ if eval "$sentencia"; then
     log "Esperando a que MariaDB esté listo..."
     timeout=90
     while [ $timeout -gt 0 ]; do
-        # Primero verificar si el proceso está escuchando en el puerto
-        if $DOCKER_CMD exec "$nombre" ss -tlnp | grep -q ":3306 " 2>/dev/null; then
-            # Luego intentar conectarse con mariadb
-            if $DOCKER_CMD exec "$nombre" mariadb -u root -p"$contrasena_root" -e "SELECT 1;" >/dev/null 2>&1; then
-                log "MariaDB está listo y funcionando"
-                break
-            fi
+        # Intentar conectarse con mariadb directamente
+        if $DOCKER_CMD exec "$nombre" mariadb -u root -p"$contrasena_root" -e "SELECT 1;" >/dev/null 2>&1; then
+            log "MariaDB está listo y funcionando"
+            break
         fi
         sleep 3
         timeout=$((timeout - 3))
