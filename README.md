@@ -35,6 +35,15 @@
 
 Este repositorio contiene una colección de scripts bash y Python diseñados para automatizar tareas comunes en sistemas Linux. Desde la configuración de entornos de desarrollo hasta la conversión de documentos, estos scripts te ayudarán a ahorrar tiempo y simplificar tu flujo de trabajo.
 
+**🎯 Objetivo:** Proporcionar herramientas de automatización confiables y fáciles de usar para desarrolladores y administradores de sistemas que trabajan en entornos Linux.
+
+**🌟 Ventajas:**
+- 🚀 **Automatización completa**: Scripts que manejan desde la detección del sistema hasta la configuración final
+- 🛡️ **Seguridad**: Configuraciones optimizadas y seguras por defecto
+- 🔧 **Flexibilidad**: Compatible con múltiples distribuciones Linux
+- 📖 **Documentación**: Cada script está completamente documentado
+- 🎯 **Plug & Play**: Listo para usar sin configuración manual
+
 ## 🛠️ Scripts Disponibles
 
 ### 🐳 Automatización de Instalaciones Docker
@@ -42,6 +51,7 @@ Este repositorio contiene una colección de scripts bash y Python diseñados par
 | Script | Descripción | Características |
 |--------|-------------|-----------------|
 | `automatizarInstalacionMySQLDocker.sh` | Instala y configura MySQL en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración segura de MySQL |
+| `automatizarInstalacionPostgreSQLDocker.sh` | Instala y configura PostgreSQL en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración optimizada de PostgreSQL |
 | `automatizarInstalacionPHP.sh` | Configura un entorno de desarrollo PHP con Nginx en Docker | ✅ Stack completo PHP + Nginx<br>✅ Configuración automática<br>✅ Entorno listo para desarrollo |
 
 ### ⚡ Configuración de Terminal
@@ -101,6 +111,22 @@ El script `automatizarInstalacionMySQLDocker.sh` automatiza completamente la ins
 - ✅ Configura el contenedor con variables de entorno seguras
 - ✅ Expone el puerto 3306 para conexiones
 
+### 🐘 PostgreSQL en Docker
+
+El script `automatizarInstalacionPostgreSQLDocker.sh` automatiza completamente la instalación de PostgreSQL:
+
+```bash
+./automatizarInstalacionPostgreSQLDocker.sh
+```
+
+**Qué hace el script:**
+- ✅ Verifica si Docker está instalado
+- ✅ Instala Docker si es necesario
+- ✅ Descarga la imagen oficial de PostgreSQL
+- ✅ Configura el contenedor con variables de entorno seguras
+- ✅ Expone el puerto 5432 para conexiones
+- ✅ Optimiza la configuración para desarrollo
+
 ### ⚡ Configuración de Oh My Zsh
 
 El script `ohmyzshauto.sh` configura tu terminal con las mejores herramientas:
@@ -140,7 +166,37 @@ El script `automatizarInstalacionPHP.sh` crea un stack completo de desarrollo:
 - 🌐 Nginx como servidor web
 - 🐳 Todo containerizado con Docker
 
-### 📄 Conversión PDF a Word
+### - 📄 Conversión PDF a Word
+
+## 💡 Casos de Uso Comunes
+
+### 🏗️ Configuración de Entorno de Desarrollo
+```bash
+# 1. Configurar terminal mejorado
+./ohmyzshauto.sh
+
+# 2. Instalar base de datos
+./automatizarInstalacionMySQLDocker.sh
+# o
+./automatizarInstalacionPostgreSQLDocker.sh
+
+# 3. Configurar entorno web
+./automatizarInstalacionPHP.sh
+```
+
+### 📋 Mejores Prácticas
+- ✅ **Siempre revisa** el contenido de un script antes de ejecutarlo
+- ✅ **Ejecuta en un entorno de prueba** primero si es crítico
+- ✅ **Mantén respaldos** de configuraciones importantes
+- ✅ **Verifica los logs** después de la ejecución
+- ✅ **Actualiza regularmente** clonando la última versión
+
+### 🔍 Troubleshooting
+| Problema | Solución |
+|----------|----------|
+| "Permission denied" | `chmod +x script.sh` |
+| "Docker not found" | El script lo instalará automáticamente |
+| "Command not found" | Verificar dependencias en la tabla de requisitos |
 
 El script `pdf_a_word.py` convierte tus documentos de manera sencilla:
 
@@ -156,17 +212,21 @@ python3 pdf_a_word.py
 ## ⚙️ Requisitos
 
 ### Sistema Operativo
-- 🐧 Linux (Ubuntu, Debian, CentOS, Fedora, Arch Linux)
-- 🍎 macOS (parcialmente compatible)
+- 🐧 **Linux**: Ubuntu 18.04+, Debian 10+, CentOS 7+, Fedora 30+, Arch Linux
+- 🍎 **macOS**: 10.15+ (compatibilidad parcial)
 
-### Dependencias Generales
-- `bash` (para scripts .sh)
-- `python3` (para scripts .py)
-- `curl` y `wget` (instalados automáticamente)
-- `git` (para clonación)
+### Dependencias Mínimas
+| Dependencia | Uso | Auto-instalación |
+|-------------|-----|------------------|
+| `bash` 4.0+ | Scripts shell | ✅ Preinstalado |
+| `python3` 3.6+ | Scripts Python | ✅ Si es necesario |
+| `curl` | Descargas | ✅ Si es necesario |
+| `git` | Clonación | ✅ Si es necesario |
+| `docker` | Contenedores | ✅ Si es necesario |
 
-### Dependencias Específicas
-Los scripts instalan automáticamente sus dependencias específicas cuando es necesario.
+### Permisos
+- 🔐 **Sudo**: Requerido para instalación de software del sistema
+- 👤 **Usuario regular**: Los scripts funcionan sin root para operaciones básicas
 
 ## 🤝 Contribuciones
 
@@ -238,5 +298,5 @@ Si estos scripts te ahorraron tiempo o te fueron útiles, ¡considera darle una 
 ---
 
 <div align="center">
-<sub>Última actualización: Julio 2025</sub>
+<sub>Última actualización: 18 de julio de 2025</sub>
 </div>
