@@ -320,14 +320,18 @@ if eval "$sentencia"; then
     
     # Esperar a que MariaDB esté listo
     log "Esperando a que MariaDB esté listo..."
-    timeout=60
+    timeout=90
     while [ $timeout -gt 0 ]; do
-        if $DOCKER_CMD exec "$nombre" mysqladmin ping -h localhost --silent 2>/dev/null; then
-            log "MariaDB está listo y funcionando"
-            break
+        # Primero verificar si el proceso está escuchando en el puerto
+        if $DOCKER_CMD exec "$nombre" ss -tlnp | grep -q ":3306 " 2>/dev/null; then
+            # Luego intentar conectarse con mariadb
+            if $DOCKER_CMD exec "$nombre" mariadb -u root -p"$contrasena_root" -e "SELECT 1;" >/dev/null 2>&1; then
+                log "MariaDB está listo y funcionando"
+                break
+            fi
         fi
-        sleep 2
-        timeout=$((timeout - 2))
+        sleep 3
+        timeout=$((timeout - 3))
     done
     
     if [ $timeout -le 0 ]; then
@@ -335,7 +339,7 @@ if eval "$sentencia"; then
     fi
     
     # Verificar la versión instalada
-    version_instalada=$($DOCKER_CMD exec "$nombre" mysql -u root -p"$contrasena_root" -e "SELECT VERSION();" 2>/dev/null | tail -n 1)
+    version_instalada=$($DOCKER_CMD exec "$nombre" mariadb -u root -p"$contrasena_root" -e "SELECT VERSION();" 2>/dev/null | tail -n 1)
     if [ -n "$version_instalada" ]; then
         log "MariaDB versión instalada: $version_instalada"
     fi
@@ -364,9 +368,9 @@ if eval "$sentencia"; then
     fi
     echo ""
     echo "Desde Docker:"
-    echo "$DOCKER_CMD exec -it $nombre mysql -u root -p"
+    echo "$DOCKER_CMD exec -it $nombre mariadb -u root -p"
     if [ "$crear_usuario" = "Y" ]; then
-        echo "$DOCKER_CMD exec -it $nombre mysql -u $usuario_custom -p"
+        echo "$DOCKER_CMD exec -it $nombre mariadb -u $usuario_custom -p"
     fi
     echo ""
     echo "GESTIÓN DE DATOS:"
