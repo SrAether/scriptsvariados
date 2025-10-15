@@ -48,11 +48,78 @@ Este repositorio contiene una colección de scripts bash y Python diseñados par
 
 ### 🐳 Automatización de Instalaciones Docker
 
+#### 🌐 Nginx en Docker (`automatizarInstalacionNginxDocker.sh`)
+
+Script completo para automatizar la instalación y configuración de Nginx en contenedores Docker con soporte para múltiples tipos de proyectos.
+
+**Características principales:**
+- 🎯 **Múltiples tipos de proyecto**:
+  - Sitios web estáticos (HTML/CSS/JS)
+  - Single Page Applications (React, Vue, Angular)
+  - Proxy reverso para aplicaciones backend
+  - Sitios PHP (WordPress, Laravel, etc.)
+  - Configuración personalizada
+  
+- 🔒 **Seguridad**:
+  - Soporte SSL/HTTPS con múltiples opciones
+  - Certificados autofirmados para desarrollo
+  - Integración con Let's Encrypt
+  - Headers de seguridad configurados
+  - Rate limiting configurable
+  
+- ⚡ **Optimización**:
+  - Compresión gzip automática
+  - Caché de archivos estáticos configurable
+  - Logs personalizados (estándar, JSON, detallado)
+  - Worker processes automáticos
+  
+- 🔌 **Proxy Reverso**:
+  - Configuración automática de headers
+  - Soporte para WebSockets
+  - Timeouts configurables
+  - Load balancing ready
+
+**Uso:**
+```bash
+./automatizarInstalacionNginxDocker.sh
+```
+
+**Ejemplo de configuración:**
+```bash
+# Sitio estático
+Tipo: Sitio estático
+Directorio: /home/usuario/mi-sitio
+Puerto HTTP: 80
+Gzip: Habilitado
+Caché: 30 días
+
+# Proxy reverso para Node.js
+Tipo: Proxy reverso
+Backend: http://localhost:3000
+WebSocket: Habilitado
+Rate limiting: 10 req/s
+```
+
+**Volúmenes creados:**
+- `{nombre}_nginx_config`: Configuración de Nginx
+- `{nombre}_nginx_logs`: Logs de acceso y errores
+- `{nombre}_nginx_cache`: Caché de archivos (opcional)
+
+**Características avanzadas:**
+- Configuración automática según tipo de proyecto
+- Generación dinámica de `nginx.conf` y `default.conf`
+- Soporte para múltiples dominios (preparado)
+- Integración con PHP-FPM (instrucciones incluidas)
+- Documentación completa de comandos útiles
+
+```
+
 | Script | Descripción | Características |
 |--------|-------------|-----------------|
 | `automatizarInstalacionMySQLDocker.sh` | Instala y configura MySQL en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración segura de MySQL |
 | `automatizarInstalacionMariaDBDocker.sh` | Instala y configura MariaDB en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración optimizada de MariaDB<br>✅ Usuarios personalizados<br>✅ Configuraciones avanzadas |
 | `automatizarInstalacionMongoDBDocker.sh` | Instala y configura MongoDB en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración con/sin autenticación<br>✅ Replica Sets<br>✅ Usuarios y roles<br>✅ Scripts de inicialización |
+| `automatizarInstalacionNginxDocker.sh` | Instala y configura Nginx como servidor web o proxy reverso | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ 5 tipos de proyecto (estático, SPA, proxy, PHP, custom)<br>✅ SSL/HTTPS configuración<br>✅ Gzip y caché<br>✅ Rate limiting<br>✅ Logs personalizados<br>✅ WebSocket support |
 | `automatizarInstalacionPostgreSQLDocker.sh` | Instala y configura PostgreSQL en un contenedor Docker | ✅ Detección automática del SO<br>✅ Instalación de Docker si es necesario<br>✅ Configuración optimizada de PostgreSQL |
 | `automatizarInstalacionPHP.sh` | Configura un entorno de desarrollo PHP con Nginx en Docker | ✅ Stack completo PHP + Nginx<br>✅ Configuración automática<br>✅ Entorno listo para desarrollo |
 
@@ -149,6 +216,56 @@ El script `automatizarInstalacionMongoDBDocker.sh` automatiza completamente la i
 - ✅ Configuraciones de rendimiento (WiredTiger Cache, conexiones)
 - ✅ Soporte para scripts de inicialización JavaScript
 - ✅ Usuarios administrador y de aplicación separados
+
+### 🌐 Nginx en Docker
+
+El script `automatizarInstalacionNginxDocker.sh` automatiza completamente la instalación y configuración de Nginx:
+
+```bash
+./automatizarInstalacionNginxDocker.sh
+```
+
+**Qué hace el script:**
+- ✅ Verifica si Docker está instalado e instala si es necesario
+- ✅ Descarga la imagen oficial de Nginx (varias versiones disponibles)
+- ✅ **Configuración inteligente según tipo de proyecto**:
+  - Sitio web estático (HTML/CSS/JS)
+  - Single Page Application (React, Vue, Angular)
+  - Proxy reverso para aplicaciones backend
+  - Sitios PHP (con instrucciones PHP-FPM)
+  - Configuración personalizada
+- ✅ **Seguridad y SSL/HTTPS**:
+  - Certificados autofirmados para desarrollo
+  - Soporte para certificados existentes
+  - Integración con Let's Encrypt
+  - Headers de seguridad automáticos
+- ✅ **Optimización de rendimiento**:
+  - Compresión gzip configurable
+  - Caché de archivos estáticos
+  - Rate limiting para protección DDoS
+  - Worker processes automáticos
+- ✅ **Características avanzadas**:
+  - Soporte WebSocket para proxy reverso
+  - Logs personalizados (estándar, JSON, detallado)
+  - Volúmenes separados para config, logs y caché
+  - Configuración dinámica de nginx.conf
+- ✅ Validación automática de configuración
+- ✅ Documentación completa de comandos útiles
+
+**Tipos de configuración soportados:**
+
+**1. Sitio Estático:** Perfecto para sitios HTML/CSS/JS simples con caché y compresión automática.
+
+**2. SPA (Single Page Application):** Configurado con fallback a index.html para routing del lado del cliente.
+
+**3. Proxy Reverso:** Ideal para aplicaciones Node.js, Python, Go, etc. Con soporte para:
+   - Headers de proxy configurados
+   - WebSocket support opcional
+   - Timeouts personalizables
+
+**4. Sitio PHP:** Preparado para PHP-FPM con instrucciones para conectar contenedor PHP.
+
+**5. Personalizada:** Configuración base que puedes modificar según necesites.
 
 ### 🐘 PostgreSQL en Docker
 
