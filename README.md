@@ -24,6 +24,7 @@
     - [🐳 Automatización de Instalaciones Docker](#-automatización-de-instalaciones-docker)
     - [⚡ Configuración de Terminal](#-configuración-de-terminal)
     - [📄 Herramientas de Conversión](#-herramientas-de-conversión)
+    - [🎨 Herramientas de Procesamiento de Imágenes](#-herramientas-de-procesamiento-de-imágenes)
   - [🚀 Instalación y Uso](#-instalación-y-uso)
   - [📖 Guías Detalladas](#-guías-detalladas)
   - [⚙️ Requisitos](#️-requisitos)
@@ -134,6 +135,13 @@ Rate limiting: 10 req/s
 | Script | Descripción | Características |
 |--------|-------------|-----------------|
 | `pdf_a_word.py` | Convierte archivos PDF a documentos Word (.docx) | ✅ Instalación automática de dependencias<br>✅ Interfaz simple<br>✅ Preserva el formato |
+
+### 🎨 Herramientas de Procesamiento de Imágenes
+
+| Script | Descripción | Características |
+|--------|-------------|-----------------|
+| `favicon.py` | Convierte imágenes a favicons en múltiples tamaños y formatos | ✅ Instalación automática de dependencias (Pillow)<br>✅ Genera .ico y .png en múltiples tamaños (16x16 a 256x256)<br>✅ Apple Touch Icon (180x180)<br>✅ Redimensionamiento de alta calidad (LANCZOS)<br>✅ Soporte para transparencia |
+| `remove_background.py` | Elimina el fondo de imágenes usando IA | ✅ Instalación automática de dependencias (rembg, Pillow)<br>✅ Modelo BiRefNet de alta calidad<br>✅ 4 modelos disponibles (general, portrait, isnet, u2net)<br>✅ Alpha matting para bordes suaves<br>✅ Salida PNG con transparencia<br>✅ Procesamiento con IA avanzada |
 
 ## 🚀 Instalación y Uso
 
@@ -458,5 +466,5 @@ Si estos scripts te ahorraron tiempo o te fueron útiles, ¡considera darle una 
 ---
 
 <div align="center">
-<sub>Última actualización: 18 de julio de 2025</sub>
+<sub>Última actualización: 3 de diciembre de 2025</sub>
 </div>
