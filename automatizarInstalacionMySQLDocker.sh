@@ -242,7 +242,7 @@ if eval "$sentencia"; then
     timeout=90
     while [ $timeout -gt 0 ]; do
         # Intentar conectarse con mysql directamente
-        if $DOCKER_CMD exec "$nombre" mysql -u root -p"$contrasena_root" -e "SELECT 1;" >/dev/null 2>&1; then
+        if $DOCKER_CMD exec "$nombre" mysql -u root -p"$contrasena" -e "SELECT 1;" >/dev/null 2>&1; then
             log "MySQL está listo y funcionando"
             break
         fi
